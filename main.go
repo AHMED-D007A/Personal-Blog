@@ -1,11 +1,9 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"log"
 	"net/http"
-	"personal_blog/templates"
 )
 
 func main() {
@@ -15,30 +13,15 @@ func main() {
 		http.Redirect(w, r, "/home", http.StatusPermanentRedirect)
 	})
 
-	mux.HandleFunc("GET /home", func(w http.ResponseWriter, r *http.Request) {
-		componant := templates.Home()
-		componant.Render(context.Background(), w)
-	})
+	mux.HandleFunc("GET /home", getHome())
 
-	mux.HandleFunc("GET /article/{id}", func(w http.ResponseWriter, r *http.Request) {
-		componant := templates.Article()
-		componant.Render(context.Background(), w)
-	})
+	mux.HandleFunc("GET /article/{id}", getArticle())
 
-	mux.HandleFunc("GET /admin", func(w http.ResponseWriter, r *http.Request) {
-		componant := templates.Admin()
-		componant.Render(context.Background(), w)
-	})
+	mux.HandleFunc("GET /admin", getAdmin())
 
-	mux.HandleFunc("GET /edit/{id}", func(w http.ResponseWriter, r *http.Request) {
-		componant := templates.Edit()
-		componant.Render(context.Background(), w)
-	})
+	mux.HandleFunc("GET /edit/{id}", getEdit())
 
-	mux.HandleFunc("GET /new", func(w http.ResponseWriter, r *http.Request) {
-		componant := templates.New()
-		componant.Render(context.Background(), w)
-	})
+	mux.HandleFunc("GET /new", getNew())
 
 	server := http.Server{
 		Addr:    ":4000",

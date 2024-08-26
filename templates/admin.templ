@@ -10,8 +10,26 @@ templ Admin() {
 			* {
 				font-family: sans-serif;
 			}
+			body {
+				margin: 20px 100px;
+			}
+			.header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.add {
+				font-size: 20px;
+				text-decoration: none;
+				display: flex;
+				align-items: center;
+				color: #222;
+				font-weight: 600;
+				margin: 0 50px;
+			}
 			h1 {
 				font-size: 50px;
+				margin: 0;
 			}
 			ul {
 				padding: 0;
@@ -52,7 +70,12 @@ templ Admin() {
 		</style>
 	</head>
 	<body>
-		<h1>Personal Blog</h1>
+		<div class="header">
+			<h1>Personal Blog</h1>
+			<a class="add" href="http://localhost:4000/new">
+				<div>+Add</div>
+			</a>
+		</div>
 		<div>
 			<ul>
 				<li>
