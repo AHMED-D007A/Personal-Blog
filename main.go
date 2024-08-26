@@ -21,15 +21,23 @@ func main() {
 	})
 
 	mux.HandleFunc("GET /article/{id}", func(w http.ResponseWriter, r *http.Request) {
+		componant := templates.Article()
+		componant.Render(context.Background(), w)
 	})
 
 	mux.HandleFunc("GET /admin", func(w http.ResponseWriter, r *http.Request) {
+		componant := templates.Admin()
+		componant.Render(context.Background(), w)
 	})
 
 	mux.HandleFunc("GET /edit/{id}", func(w http.ResponseWriter, r *http.Request) {
+		componant := templates.Edit()
+		componant.Render(context.Background(), w)
 	})
 
 	mux.HandleFunc("GET /new", func(w http.ResponseWriter, r *http.Request) {
+		componant := templates.New()
+		componant.Render(context.Background(), w)
 	})
 
 	server := http.Server{

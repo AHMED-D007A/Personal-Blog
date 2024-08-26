@@ -6,9 +6,69 @@ templ Admin() {
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Personal Blog</title>
+		<style>
+			* {
+				font-family: sans-serif;
+			}
+			h1 {
+				font-size: 50px;
+			}
+			ul {
+				padding: 0;
+				margin: 0;
+			}
+			li {
+				list-style: none;
+				display: flex;
+				justify-content: space-between;
+				padding: 0px 50px;
+				margin: 20px 0;
+				background-color: #eee;
+			}
+			.article {
+				text-decoration: none;
+				display: flex;
+				justify-content: space-between;
+				width: 80%;
+			}
+			.title {
+				font-size: 25px;
+				font-weight: 600;
+				color: #333;
+			}
+			.date {
+				font-size: 25px;
+				font-weight: 500;
+				color: #aaa;
+			}
+			.edit, .delete {
+				font-size: 20px;
+				text-decoration: none;
+				display: flex;
+				align-items: center;
+				color: #222;
+				font-weight: 600;
+			}
+		</style>
 	</head>
 	<body>
-		
+		<h1>Personal Blog</h1>
+		<div>
+			<ul>
+				<li>
+					<a class="article" href="">
+						<p class="title">title</p>
+						<p class="date">August 7, 2024</p>
+					</a>
+					<a class="edit" href="">
+						<div>Edit</div>
+					</a>
+					<a class="delete" href="">
+						<div>Delete</div>
+					</a>
+				</li>
+			</ul>
+		</div>
 	</body>
 	</html>
 }

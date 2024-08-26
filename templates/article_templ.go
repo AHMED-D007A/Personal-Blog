@@ -26,7 +26,7 @@ func Article() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 1)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Personal Blog</title><style>\n\t\t\t* {\n\t\t\t\tfont-family: sans-serif;\n\t\t\t}\n\t\t\th1 {\n\t\t\t\tfont-size: 60px;\n\t\t\t\tmargin: 10px 0;\n\t\t\t}\n\t\t\th3 {\n\t\t\t\tfont-size: 20px;\n\t\t\t\tmargin: 15px 0;\n\t\t\t\tcolor: #aaa;\n\t\t\t}\n\t\t\tp {\n\t\t\t\tfont-size: 25px;\n\t\t\t}\n\t\t</style></head><body><h1>title</h1><h3>August 7, 2024</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore et.</p></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

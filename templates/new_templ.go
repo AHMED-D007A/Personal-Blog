@@ -26,7 +26,7 @@ func New() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 1)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Personal Blog</title><style>\n\t\t\t* {\n\t\t\t\tfont-family: sans-serif;\n\t\t\t}\n\t\t\th1 {\n\t\t\t\tfont-size: 50px;\n\t\t\t}\n\t\t\tform {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\t\t\tinput {\n\t\t\t\tfont-size: 20px;\n\t\t\t\tmargin: 20px 0;\n\t\t\t\twidth: 60%;\n\t\t\t}\n\t\t\ttextarea {\n\t\t\t\tfont-size: 20px;\n\t\t\t\tmargin: 20px 0;\n\t\t\t\twidth: 60%;\n\t\t\t}\n\t\t</style></head><body><h1>New Article</h1><form action=\"\" method=\"post\"><input type=\"text\" id=\"title\" name=\"title\" placeholder=\"Article Title\" required> <input type=\"date\" id=\"publish_date\" name=\"publish_date\" placeholder=\"Publishing Date\" required> <textarea id=\"content\" name=\"content\" rows=\"10\" cols=\"50\" placeholder=\"Content\" required></textarea> <input type=\"submit\" value=\"Publish\"></form></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
