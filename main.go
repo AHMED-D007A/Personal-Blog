@@ -9,7 +9,7 @@ import (
 func main() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/home", http.StatusPermanentRedirect)
 	})
 
@@ -17,11 +17,13 @@ func main() {
 
 	mux.HandleFunc("GET /article/{id}", getArticle())
 
-	mux.HandleFunc("GET /admin", getAdmin())
+	mux.HandleFunc("GET /admin", basicAuth(getAdmin()))
 
-	mux.HandleFunc("GET /edit/{id}", getEdit())
+	mux.HandleFunc("GET /edit/{id}", basicAuth(getEdit()))
+	mux.HandleFunc("POST /edit/{id}", basicAuth(postEdit()))
 
-	mux.HandleFunc("GET /new", getNew())
+	mux.HandleFunc("GET /new", basicAuth(getNew()))
+	mux.HandleFunc("POST /new", basicAuth(postNew()))
 
 	server := http.Server{
 		Addr:    ":4000",
