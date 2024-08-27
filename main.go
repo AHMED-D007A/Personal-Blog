@@ -25,6 +25,8 @@ func main() {
 	mux.HandleFunc("GET /new", basicAuth(getNew()))
 	mux.HandleFunc("POST /new", basicAuth(postNew()))
 
+	mux.HandleFunc("GET /delete/{id}", basicAuth(getDelete()))
+
 	server := http.Server{
 		Addr:    ":4000",
 		Handler: logging(mux),

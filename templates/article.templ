@@ -1,6 +1,8 @@
 package templates
 
-templ Article() {
+import "personal_blog/types"
+
+templ Article(article types.Article) {
 	<html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -28,9 +30,9 @@ templ Article() {
 		</style>
 	</head>
 	<body>
-		<h1>title</h1>
-		<h3>August 7, 2024</h3>
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore et.</p>
+		<h1>{ article.Title }</h1>
+		<h3>{ article.Date }</h3>
+		<p>{ article.Content }</p>
 	</body>
 	</html>
 }

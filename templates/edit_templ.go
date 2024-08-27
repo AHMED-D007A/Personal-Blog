@@ -8,7 +8,9 @@ package templates
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func Edit() templ.Component {
+import "personal_blog/types"
+
+func Edit(article types.Article) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
@@ -26,7 +28,46 @@ func Edit() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Personal Blog</title><style>\n\t\t\t* {\n\t\t\t\tfont-family: sans-serif;\n\t\t\t}\n\t\t\tbody {\n\t\t\t\tmargin: 20px 100px;\n\t\t\t}\n\t\t\th1 {\n\t\t\t\tfont-size: 50px;\n\t\t\t}\n\t\t\tform {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\t\t\tinput {\n\t\t\t\tfont-size: 20px;\n\t\t\t\tmargin: 20px 0;\n\t\t\t\twidth: 60%;\n\t\t\t}\n\t\t\ttextarea {\n\t\t\t\tfont-size: 20px;\n\t\t\t\tmargin: 20px 0;\n\t\t\t\twidth: 60%;\n\t\t\t}\n\t\t</style></head><body><h1>Update Article</h1><form action=\"\" method=\"post\"><input type=\"text\" id=\"title\" name=\"title\" placeholder=\"Article Title\" required> <input type=\"date\" id=\"publish_date\" name=\"publish_date\" placeholder=\"Publishing Date\" required> <textarea id=\"content\" name=\"content\" rows=\"10\" cols=\"50\" placeholder=\"Content\" required></textarea> <input type=\"submit\" value=\"Update\"></form></body></html>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Personal Blog</title><style>\n\t\t\t* {\n\t\t\t\tfont-family: sans-serif;\n\t\t\t}\n\t\t\tbody {\n\t\t\t\tmargin: 20px 100px;\n\t\t\t}\n\t\t\th1 {\n\t\t\t\tfont-size: 50px;\n\t\t\t}\n\t\t\tform {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\t\t\tinput {\n\t\t\t\tfont-size: 20px;\n\t\t\t\tmargin: 20px 0;\n\t\t\t\twidth: 60%;\n\t\t\t}\n\t\t\ttextarea {\n\t\t\t\tfont-size: 20px;\n\t\t\t\tmargin: 20px 0;\n\t\t\t\twidth: 60%;\n\t\t\t}\n\t\t</style></head><body><h1>Update Article</h1><form action=\"\" method=\"post\"><input type=\"text\" id=\"title\" name=\"title\" placeholder=\"Article Title\" value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var2 string
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(article.Title)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `edit.templ`, Line: 40, Col: 95}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" required> <input type=\"date\" id=\"publish_date\" name=\"publish_date\" placeholder=\"Publishing Date\" value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 string
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(article.Date)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `edit.templ`, Line: 41, Col: 110}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" required> <textarea id=\"content\" name=\"content\" rows=\"10\" cols=\"50\" placeholder=\"Content\" required>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(article.Content)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `edit.templ`, Line: 42, Col: 109}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</textarea> <input type=\"submit\" value=\"Update\"></form></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

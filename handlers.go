@@ -15,22 +15,9 @@ import (
 
 func getHome() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		componant := templates.Home()
-		componant.Render(context.Background(), w)
-	}
-}
-
-func getArticle() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		componant := templates.Article()
-		componant.Render(context.Background(), w)
-	}
-}
-
-func getAdmin() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
 		var article types.Article
 		var articles []types.Article
+		var file *os.File
 
 		entries, err := os.ReadDir("storage")
 		if err != nil {
@@ -49,22 +36,48 @@ func getAdmin() http.HandlerFunc {
 			articles = append(articles, article)
 		}
 
-		componant := templates.Admin(articles)
+		defer file.Close()
+
+		componant := templates.Home(articles)
 		componant.Render(context.Background(), w)
 	}
 }
 
-func getEdit() http.HandlerFunc {
+func getArticle() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		var article types.Article
+
+		file, err := os.Open("./storage/" + r.PathValue("id") + ".json")
+		if err != nil {
+			log.Println(err.Error())
+		}
+
+		data, err := io.ReadAll(file)
+		if err != nil {
+			log.Println(err.Error())
+		}
+
+		json.Unmarshal(data, &article)
+
+		defer file.Close()
+
+		componant := templates.Article(article)
+		componant.Render(context.Background(), w)
+	}
+}
+
+func getAdmin() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var article types.Article
 		var articles []types.Article
+		var file *os.File
 
 		entries, err := os.ReadDir("storage")
 		if err != nil {
 			log.Println(err.Error())
 		}
-		for _, v := range entries {
-			file, err := os.Open("./storage/" + v.Name())
+		for i := len(entries) - 1; i >= 0; i-- {
+			file, err := os.Open("./storage/" + entries[i].Name())
 			if err != nil {
 				log.Println(err.Error())
 			}
@@ -76,8 +89,46 @@ func getEdit() http.HandlerFunc {
 			articles = append(articles, article)
 		}
 
-		componant := templates.Edit()
+		defer file.Close()
+
+		componant := templates.Admin(articles)
 		componant.Render(context.Background(), w)
+	}
+}
+
+func getEdit() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		var article types.Article
+
+		file, err := os.Open("./storage/" + r.PathValue("id") + ".json")
+		if err != nil {
+			log.Println(err.Error())
+		}
+
+		data, err := io.ReadAll(file)
+		if err != nil {
+			log.Println(err.Error())
+		}
+
+		json.Unmarshal(data, &article)
+
+		defer file.Close()
+
+		componant := templates.Edit(article)
+		componant.Render(context.Background(), w)
+	}
+}
+
+func getDelete() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		fileName := "./storage/" + r.PathValue("id") + ".json"
+
+		err := os.Remove(fileName)
+		if err != nil {
+			log.Println(err.Error())
+		}
+
+		http.Redirect(w, r, "/admin", http.StatusSeeOther)
 	}
 }
 
@@ -130,12 +181,37 @@ func postNew() http.HandlerFunc {
 
 		file.Write(jsonData)
 
-		http.Redirect(w, r, "/admin", http.StatusMovedPermanently)
+		defer file.Close()
+
+		http.Redirect(w, r, "/admin", http.StatusSeeOther)
 	}
 }
 
 func postEdit() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "admin", http.StatusMovedPermanently)
+		var article types.Article
+
+		r.ParseForm()
+		article.Title = r.FormValue("title")
+		article.Date = r.FormValue("publish_date")
+		article.Content = r.FormValue("content")
+		article.ID, _ = strconv.Atoi(r.PathValue("id"))
+
+		jsonData, err := json.MarshalIndent(&article, "", "\t")
+		if err != nil {
+			log.Println(err.Error())
+		}
+
+		fileName := fmt.Sprintf("./storage/%v.json", article.ID)
+		file, err := os.Create(fileName)
+		if err != nil {
+			log.Println(err.Error())
+		}
+
+		file.Write(jsonData)
+
+		defer file.Close()
+
+		http.Redirect(w, r, "/admin", http.StatusSeeOther)
 	}
 }

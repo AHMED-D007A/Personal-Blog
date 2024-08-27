@@ -87,10 +87,10 @@ templ Admin(articles []types.Article) {
 							<p class="title">{ v.Title }</p>
 							<p class="date">{ v.Date }</p>
 						</a>
-						<a class="edit" href="">
+						<a class="edit" href={ templ.SafeURL(fmt.Sprintf("http://localhost:4000/edit/%v", v.ID)) }>
 							<div>Edit</div>
 						</a>
-						<a class="delete" href="">
+						<a class="delete" href={ templ.SafeURL(fmt.Sprintf("http://localhost:4000/delete/%v", v.ID)) }>
 							<div>Delete</div>
 						</a>
 					</li>

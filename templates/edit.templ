@@ -1,6 +1,8 @@
 package templates
 
-templ Edit() {
+import "personal_blog/types"
+
+templ Edit(article types.Article) {
 	<html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -35,9 +37,9 @@ templ Edit() {
 	<body>
 		<h1>Update Article</h1>
 		<form action="" method="post">
-			<input type="text" id="title" name="title" placeholder="Article Title" required>
-			<input type="date" id="publish_date" name="publish_date" placeholder="Publishing Date" required>
-			<textarea id="content" name="content" rows="10" cols="50" placeholder="Content" required></textarea>
+			<input type="text" id="title" name="title" placeholder="Article Title" value={ article.Title } required>
+			<input type="date" id="publish_date" name="publish_date" placeholder="Publishing Date" value={ article.Date } required>
+			<textarea id="content" name="content" rows="10" cols="50" placeholder="Content" required>{ article.Content }</textarea>
 			<input type="submit" value="Update">
 		</form>
 	</body>
